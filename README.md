@@ -1,5 +1,8 @@
 # NFSC HUD Resizer  
-Control the size of the HUD in Need for Speed: Carbon.
+
+## Features
+- HUDScale: Controls the size of the HUD and menus.
+- FMVScale: Conotrols the size of FMVs.
 
 ## Credits
 [Aero_](https://github.com/AeroWidescreen) : Creator of NFSC HUD Resizer.  
