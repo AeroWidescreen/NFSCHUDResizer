@@ -12,6 +12,7 @@ float HUDScale;
 float HUDSize;
 float HUDPos;
 float FMVScale;
+bool AutoHideCursor;
 
 DWORD HUDSizeCodeCaveExit1 = 0x71C776;
 DWORD HUDSizeCodeCaveExit2 = 0x71C78D;
@@ -463,6 +464,7 @@ void Init()
 	// General
 	HUDScale = iniReader.ReadFloat("GENERAL", "HUDScale", 0.92f);
 	FMVScale = iniReader.ReadFloat("GENERAL", "FMVScale", 0.92f);
+	AutoHideCursor = iniReader.ReadInteger("GENERAL", "AutoHideCursor", 1);
 
 	{
 		// HUD Size
@@ -477,6 +479,11 @@ void Init()
 		injector::MakeJMP(0x750B95, RVMPIPPosCodeCave, true);
 		// FVM Size
 		injector::MakeJMP(0x598ED4, FMVSizeCodeCave, true);
+	}
+
+	if (AutoHideCursor)
+	{
+		injector::MakeNOP(0x585318, 2, true);
 	}
 }
 	
@@ -494,7 +501,7 @@ BOOL APIENTRY DllMain(HMODULE /*hModule*/, DWORD reason, LPVOID /*lpReserved*/)
 
 		else
 		{
-			MessageBoxA(NULL, "This .exe is not supported.\nPlease use v1.4 English nfsc.exe (6,88 MB (7.217.152 bytes)).", "NFSC HUD Resizer", MB_ICONERROR);
+			MessageBoxA(NULL, "This .exe is not supported.\nPlease use v1.4 English nfsc.exe (6,88 MB (7.217.152 bytes)).", "NFSC HUD Resizer by Aero_", MB_ICONERROR);
 			return FALSE;
 		}
 	}
